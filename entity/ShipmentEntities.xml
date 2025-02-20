@@ -43,7 +43,7 @@
         <relationship type="many" related="shipmentmgr.shipmentitem.ShipmentItem" title="Items">
             <key-map field-name="shipmentId"/>
         </relationship>
-        <relationship type="many" related="shipment.shipmentpackage.ShipmentPackage" title="Package">
+        <relationship type="many" related="shipmentmgr.shipmentpackage.ShipmentPackage" title="Package">
             <key-map field-name="shipmentId"/>
         </relationship>
 
@@ -89,6 +89,20 @@
         <relationship type="one" related="moqui.basic.Uom" short-alias="weightUom">
             <key-map field-name="weightUomId"/>
         </relationship>
+    </entity>
+    
+    <entity entity-name="ShipmentPackageContent" package="shipmentmgr.shipmentpackagecontent">
+        <field name="shipmentId" type="id" is-pk="true"/>
+        <field name="shipmentPackageSeqId" type="id" is-pk="true"/>
+        <field name="productId" type="id"/>
+        <field name="quantity" type="number-integer"/>
+        
+        <relationship type="one-nofk" related="shipmentmgr.shipment.Shipment" short-alias="shipment"/>
+        <relationship type="one" related="shipmentmgr.shipmentpackage.ShipmentPackage" short-alias="package">
+            <key-map field-name="shipmentId"/>
+            <key-map field-name="shipmentPackageSeqId"/>
+        </relationship>
+        <relationship type="one-nofk" related="productinfo.product.Product" short-alias="product"/>
     </entity>
     
 </entities>

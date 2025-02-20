@@ -7,5 +7,6 @@
 <!--                                   binLocationNumber="10"/>-->
 <!--    <shipmentmgr.shipmentitem.ShipmentItem shipmentId="SHIP001" productId="PROD20001"-->
 <!--                                            quantity="1"/>-->
-    <shipmentmgr.shipmentpackage.ShipmentPackage shipmentId="SHIP001" shipmentPackageSeqId="001" weight="5" weightUomId="WT_kg"/>
+<!--    <shipmentmgr.shipmentpackage.ShipmentPackage shipmentId="SHIP001" shipmentPackageSeqId="001" weight="5" weightUomId="WT_kg"/>-->
+    <shipmentmgr.shipmentpackagecontent.ShipmentPackageContent shipmentId="SHIP001" shipmentPackageSeqId="001" productId="PROD20001" quantity="1"/>
 </entity-facade-xml>
