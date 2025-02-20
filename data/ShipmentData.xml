@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<entity-facade-xml type="demo">
+    <shipmentmgr.shipment.Shipment shipmentId="SHIP001" shipmentTypeEnumId="ShpTpSales"
+                                   fromPartyId="ORG456" toPartyId="PER123"
+                                   estimatedShipDate="2024-09-16" statusId="ShipPacked"
+                                   estimatedShipCost="15.00" costUomId="USD"
+                                   binLocationNumber="10"/>
+</entity-facade-xml>

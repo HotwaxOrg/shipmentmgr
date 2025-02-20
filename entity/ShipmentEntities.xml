@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
+    <entity entity-name="Shipment" package="shipmentmgr.shipment">
+        <field name="shipmentId" type="id" is-pk="true"/>
+        <field name="shipmentTypeEnumId" type="id"/>
+        <field name="fromPartyId" type="id"/>
+        <field name="toPartyId" type="id"/>
+        <field name="estimatedShipDate" type="date"/>
+        <field name="statusId" type="id"/>
+        <field name="estimatedShipCost" type="number-decimal"/>
+        <field name="costUomId" type="id"/>
+        <field name="binLocationNumber" type="number-integer"/>
+
+        <relationship type="one" related="moqui.basic.Enumeration" title="ShipmentType">
+            <key-map field-name="shipmentTypeEnumId"/>
+        </relationship>
+        <relationship type="one" related="customer.party.Party" title="From">
+            <key-map field-name="fromPartyId"/>
+        </relationship>
+        <relationship type="one-nofk" related="customer.organization.Organization" title="From">
+            <key-map field-name="fromPartyId"/>
+        </relationship>
+        <relationship type="one-nofk" related="customer.person.Person" title="From">
+            <key-map field-name="fromPartyId"/>
+        </relationship>
+        <relationship type="one" related="customer.party.Party" title="To">
+            <key-map field-name="toPartyId"/>
+        </relationship>
+        <relationship type="one-nofk" related="customer.organization.Organization" title="To">
+            <key-map field-name="toPartyId"/>
+        </relationship>
+        <relationship type="one-nofk" related="customer.person.Person" title="To">
+            <key-map field-name="toPartyId"/>
+        </relationship>
+        <relationship type="one" related="moqui.basic.StatusItem" title="Status">
+            <key-map field-name="statusId"/>
+        </relationship>
+        <relationship type="one" related="moqui.basic.Uom" title="Currency">
+            <key-map field-name="costUomId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType enumTypeId="ShipmentType" description="Shipment Type"/>
+            <moqui.basic.Enumeration description="Incoming" enumId="ShpTpIncoming" enumTypeId="ShipmentType"/>
+            <moqui.basic.Enumeration description="Outgoing" enumId="ShpTpOutgoing" enumTypeId="ShipmentType"/>
+            <moqui.basic.Enumeration description="Sales Return" parentEnumId="ShpTpIncoming" enumId="ShpTpSalesReturn" enumTypeId="ShipmentType"/>
+            <moqui.basic.Enumeration description="Sales Shipment" parentEnumId="ShpTpOutgoing" enumId="ShpTpSales" enumTypeId="ShipmentType"/>
+            <moqui.basic.Enumeration description="Purchase Shipment" parentEnumId="ShpTpIncoming" enumId="ShpTpPurchase" enumTypeId="ShipmentType"/>
+            <moqui.basic.Enumeration description="Purchase Return" parentEnumId="ShpTpOutgoing" enumId="ShpTpPurchaseReturn" enumTypeId="ShipmentType"/>
+            <moqui.basic.Enumeration description="Drop Shipment" enumId="ShpTpDrop" enumTypeId="ShipmentType"/>
+            <moqui.basic.Enumeration description="Transfer" enumId="ShpTpTransfer" enumTypeId="ShipmentType"/>
+
+            <moqui.basic.StatusType description="Shipment Status" statusTypeId="Shipment"/>
+            <moqui.basic.StatusItem description="Input" sequenceNum="1" statusId="ShipInput" statusTypeId="Shipment"/>
+            <moqui.basic.StatusItem description="Scheduled" sequenceNum="2" statusId="ShipScheduled" statusTypeId="Shipment"/>
+            <moqui.basic.StatusItem description="Picked" sequenceNum="3" statusId="ShipPicked" statusTypeId="Shipment"/>
+            <moqui.basic.StatusItem description="Packed" sequenceNum="4" statusId="ShipPacked" statusTypeId="Shipment"/>
+            <moqui.basic.StatusItem description="Shipped" sequenceNum="5" statusId="ShipShipped" statusTypeId="Shipment"/>
+            <moqui.basic.StatusItem description="Delivered" sequenceNum="6" statusId="ShipDelivered" statusTypeId="Shipment"/>
+            <moqui.basic.StatusItem description="Rejected" sequenceNum="98" statusId="ShipRejected" statusTypeId="Shipment"/>
+            <moqui.basic.StatusItem description="Cancelled" sequenceNum="99" statusId="ShipCancelled" statusTypeId="Shipment"/>
+        </seed-data>
+    </entity>
+</entities>
