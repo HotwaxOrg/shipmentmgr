@@ -62,4 +62,14 @@
             <moqui.basic.StatusItem description="Cancelled" sequenceNum="99" statusId="ShipCancelled" statusTypeId="Shipment"/>
         </seed-data>
     </entity>
+
+    <entity entity-name="ShipmentItem" package="shipmentmgr.shipmentitem">
+        <field name="shipmentId" type="id" is-pk="true"/>
+        <field name="productId" type="id"/>
+        <field name="quantity" type="number-integer"/>
+
+        <relationship type="one" related="shipmentmgr.shipment.Shipment" short-alias="shipment"/>
+        <relationship type="one" related="productinfo.product.Product" short-alias="product"/>
+
+    </entity>
 </entities>

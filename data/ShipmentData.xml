@@ -5,4 +5,6 @@
                                    estimatedShipDate="2024-09-16" statusId="ShipPacked"
                                    estimatedShipCost="15.00" costUomId="USD"
                                    binLocationNumber="10"/>
+    <shipmentmgr.shipmentitem.ShipmentItem shipmentId="SHIP001" productId="PROD20001"
+                                            quantity="1"/>
 </entity-facade-xml>
