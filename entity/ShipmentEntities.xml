@@ -46,6 +46,9 @@
         <relationship type="many" related="shipmentmgr.shipmentpackage.ShipmentPackage" title="Package">
             <key-map field-name="shipmentId"/>
         </relationship>
+        <relationship type="many" related="shipmentmgr.shipmentroutesegment.ShipmentRouteSegment" title="RouteSegment">
+            <key-map field-name="shipmentId"/>
+        </relationship>
 
         <seed-data>
             <moqui.basic.EnumerationType enumTypeId="ShipmentType" description="Shipment Type"/>
@@ -103,6 +106,34 @@
             <key-map field-name="shipmentPackageSeqId"/>
         </relationship>
         <relationship type="one-nofk" related="productinfo.product.Product" short-alias="product"/>
+    </entity>
+
+    <entity entity-name="ShipmentRouteSegment" package="shipmentmgr.shipmentroutesegment">
+        <field name="shipmentId" type="id" is-pk="true"/>
+        <field name="shipmentRouteSegmentId" type="id" is-pk="true"/>
+        <field name="carrierPartyId" type="id"/>
+        <field name="shipmentMethodTypeEnumId" type="id"/>
+        <field name="originPostalContactMechId" type="id"/>
+        <field name="destPostalContactMechId" type="id"/>
+        
+        <relationship type="one" related="shipmentmgr.shipment.Shipment" short-alias="shipment"/>
+        <relationship type="one" related="customer.party.Party" title="Carrier">
+            <key-map field-name="carrierPartyId"/>
+        </relationship>
+        <relationship type="one" related="moqui.basic.Enumeration" title="ShipmentMethodType">
+            <key-map field-name="shipmentMethodTypeEnumId"/>
+        </relationship>
+        <relationship type="one" related="customer.contactmech.ContactMech" title="OriginContactMech">
+            <key-map field-name="originPostalContactMechId"/>
+        </relationship>
+        <relationship type="one" related="customer.contactmech.ContactMech" title="DestinantionContactMech">
+            <key-map field-name="destPostalContactMechId"/>
+        </relationship>
+
+        <seed-data>
+            <moqui.basic.EnumerationType description="Shipment Method Type" enumTypeId="ShipmentMethodType"/>
+            <moqui.basic.Enumeration enumId="GROUND" enumTypeId="ShipmentMethodType"/>
+        </seed-data>
     </entity>
     
 </entities>
