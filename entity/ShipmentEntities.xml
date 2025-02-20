@@ -40,6 +40,13 @@
             <key-map field-name="costUomId"/>
         </relationship>
 
+        <relationship type="many" related="shipmentmgr.shipmentitem.ShipmentItem" title="Items">
+            <key-map field-name="shipmentId"/>
+        </relationship>
+        <relationship type="many" related="shipment.shipmentpackage.ShipmentPackage" title="Package">
+            <key-map field-name="shipmentId"/>
+        </relationship>
+
         <seed-data>
             <moqui.basic.EnumerationType enumTypeId="ShipmentType" description="Shipment Type"/>
             <moqui.basic.Enumeration description="Incoming" enumId="ShpTpIncoming" enumTypeId="ShipmentType"/>
@@ -70,6 +77,18 @@
 
         <relationship type="one" related="shipmentmgr.shipment.Shipment" short-alias="shipment"/>
         <relationship type="one" related="productinfo.product.Product" short-alias="product"/>
-
     </entity>
+    
+    <entity entity-name="ShipmentPackage" package="shipmentmgr.shipmentpackage">
+        <field name="shipmentId" type="id" is-pk="true"/>
+        <field name="shipmentPackageSeqId" type="id" is-pk="true"/>
+        <field name="weight" type="number-decimal"/>
+        <field name="weightUomId" type="id"/>
+        
+        <relationship type="one" related="shipmentmgr.shipment.Shipment"/>
+        <relationship type="one" related="moqui.basic.Uom" short-alias="weightUom">
+            <key-map field-name="weightUomId"/>
+        </relationship>
+    </entity>
+    
 </entities>
